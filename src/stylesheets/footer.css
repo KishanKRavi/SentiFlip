@@ -1,0 +1,107 @@
+:root {
+    --dark-blue: #00196d;
+    --light-blue: #658eff;
+    --black: #000000;
+    --white: #FFFFFF;
+  }
+
+/* Footer Container */
+.footerOBJ{
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    background: linear-gradient(to right, #0d0058, #2e82ff);
+}
+.footer-container {
+    color: var(--white);
+    text-align: center;
+    padding: 2rem 5%;  /* Adjust padding for a neat layout */
+    box-sizing: border-box; /* Ensures padding does not affect width */
+  }
+  
+
+/* Footer Content */
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+/* Footer Logo */
+.footer-logo h2 {
+  font-size: 2rem;
+  font-weight: bolder;
+  color: var(--white);
+}
+
+.footer-logo p {
+  font-size: 1rem;
+  color: #bbb;
+  margin-top: 0.5rem;
+}
+
+/* Footer Social Icons */
+.footer-socials {
+  display: flex;
+  gap: 2rem;
+}
+
+.footer-socials .social-icon {
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: scale 0.3s ease;
+}
+
+.footer-socials .social-icon:hover {
+  scale: 1.1;
+
+}
+
+
+/* Footer Bottom */
+.footer-bottom {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+
+/* Responsive Rules for Small Screens */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-socials {
+    justify-content: center;
+    gap: 1rem;
+  }
+}
+
+
+.logoImg{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+/* Logo */
+.logo {
+  display: flex;
+  font-size: 1.8rem;
+  font-weight: bolder;
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.foottterr{
+  font-size: 11px;
+  opacity: 0.8;
+  text-align: left;
+}

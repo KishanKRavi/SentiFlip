@@ -1,0 +1,107 @@
+/* Base Styles */
+* {
+  font-family: "Comic Relief", system-ui;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+  padding: 1rem 2rem;
+  background: linear-gradient(to right, #120075, #2e82ff);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logoImg{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+/* Logo */
+.logo {
+  display: flex;
+  font-size: 1.8rem;
+  font-weight: bolder;
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  transition:  0.2s ease;
+  
+}
+
+.nav-links li a:hover {
+  background-color: #8ca7f16e;
+  box-shadow: 0 4px 12px rgb(0, 0, 0);
+}
+
+.nav-links li a:active {
+  background-color: #8ca7f16e;
+  color: #8198ff;
+}
+
+/* Hamburger Icon */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 3px;
+}
+
+/* Responsive Rules */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 2rem;
+    background: #120075;
+    flex-direction: column;
+    width: 100px;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 0.5rem 0;
+  }
+}
