@@ -9,7 +9,7 @@ import '../stylesheets/footer.css';
 import '../stylesheets/analyzeproducts.css';
 import '../stylesheets/loadSpinner.css'
 import SentimentGauge from './sentimentSpeedometer';
-import ReviewWordCloud from './ReviewWordCloud';
+// import ReviewWordCloud from './ReviewWordCloud';
 
 function shouldDisplayReviewText(rating, heading, text) {
   if (!rating || !heading || !text) return true;
@@ -106,9 +106,9 @@ function AnalyzeProduct() {
          <section className='sentiment speedometer'>
           <SentimentGauge score={analysis.overall_score}/>
         </section>
-        <section className='wordcloud'>
+        {/* <section className='wordcloud'>
           <ReviewWordCloud reviews={analysis.reviews} />
-        </section>
+        </section> */}
         
         <section className="gemini-analysis">
           <h3 className="section-title">Details of analysis</h3>
