@@ -5,14 +5,11 @@ import '../stylesheets/homePage.css';
 import '../stylesheets/footer.css';
 import Navbar from "./NavBar";
 import Footer from "./Footer";
-
 const HomePage = () => {
-  
   return (
     <div className="homepage">
       {/* Navbar */}
       <Navbar></Navbar>
-
       <div className="homepage-container">
         {/* Header */}
         <br /><br /><br />
@@ -20,9 +17,7 @@ const HomePage = () => {
           <h1 className="homepage-title">SentiFlip</h1>
           <p className="homepage-subtitle">Sentiment Analyzer of Flipkart Products <br /> Understand product emotions before you buy</p>
         </div>
-
         <a className="linkBtn" href="/search">Try Now</a>
-
         {/* Description */}
         <div className="homepage-description">
           <p>
@@ -31,8 +26,6 @@ const HomePage = () => {
             to generate accurate sentiment analysis of product reviews.
           </p>
         </div>
-
-        
         {/* Features */}
         <hr />
         <h2 className="features-title">Features</h2>
@@ -58,7 +51,6 @@ const HomePage = () => {
             <p>Visual feedback with sentiment percentages and ratings.</p>
           </div>
         </div>
-
         {/* Footer */}
         <Footer/>
       </div>
@@ -66,5 +58,4 @@ const HomePage = () => {
     </div>
   );
 };
-
 export default HomePage;

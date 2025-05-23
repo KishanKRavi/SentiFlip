@@ -7,7 +7,6 @@ import '../stylesheets/about.css';
 
 export default function About() {
   const [activeTab, setActiveTab] = useState('project');
-
   return (
     <>
       <Navbar />

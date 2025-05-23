@@ -7,19 +7,16 @@ import '../stylesheets/homePage.css';
 import '../stylesheets/footer.css';
 import '../stylesheets/searchPage.css';
 import '../stylesheets/loadSpinner.css'
-
 function SearchProduct() {
   const [query, setQuery] = useState('');
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const handleSearch = async (e) => {
   e.preventDefault(); // Prevent form refresh
-
   try {
     setLoading(true);
     console.log("searching in progress ... please wait ...");
-    const response = await axios.get(`https://sentiflip-backend.onrender.com/search/?query=${query}`);
+    const response = await axios.get(`http://127.0.0.1:8000/search/?query=${query}`);
     setLoading(false);
     console.log("searching completed ... please wait ...");
     setProducts(response.data.products);
@@ -28,28 +25,22 @@ function SearchProduct() {
     console.error("Error searching products", error);
   }
 };
-
-
   const openAnalyzePage = (product) => {
     // Log the product to check its details
     console.log(product);
-  
     if (!product.Link) {
       console.error("Product Link is missing");
       return;
     }
-  
     // Create a URLSearchParams object for query string construction
     const productDetails = new URLSearchParams({
       title: product.Title || 'N/A',
       price: product.Price || 'N/A',
       image: product.Image || 'N/A',
     }).toString();
-  
     // Open the analyze page in a new window with the product details
     window.open(`/analyze?url=${encodeURIComponent(product.Link)}&${productDetails}`, '_blank');
   };
-  
   return (
     <div>
       <Navbar />
@@ -68,16 +59,12 @@ function SearchProduct() {
         <br />
         <button type="submit" className="search-button">Search</button>
       </form>
-
     </div>
-
     {loading && (
       <>
         <div class="loadingSpinner">
           <div class="spinner">
-            
               <img className='logoimg' src="../../public/sentiflip_logo.png" alt="" />
-            
           </div>
           <div class="loadingText">Loading... Please wait</div>
         </div>  
@@ -106,7 +93,6 @@ function SearchProduct() {
           </li>
         ))}
       </ul>
-    
       <div className="footer-space">
         <small>*note: The data  is being scraped from Flipkart</small>
       </div>
@@ -114,5 +100,4 @@ function SearchProduct() {
     </div>
   );
 }
-
 export default SearchProduct;

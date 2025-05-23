@@ -2,7 +2,6 @@
 import React from 'react';
 import ReactSpeedometer from 'react-d3-speedometer';
 import '../stylesheets/sentimentSpeedometer.css';
-
 const SentimentGauge = ({ score }) => {
   return (
     <div className="gauge-wrapper">
@@ -53,11 +52,8 @@ const SentimentGauge = ({ score }) => {
           needleTransition="easeBounce"
           needleTransitionDuration={5000}
           height={200}
-          
         />
-    
     </div>
   );
 };
-
 export default SentimentGauge;

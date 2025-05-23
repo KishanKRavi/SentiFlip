@@ -5,7 +5,6 @@ import AnalyzeProduct from './components/AnalyzeProduct';
 import HomePage from './components/HomePage';
 import AnalyzeByUrl from './components/AnalyzeByURL';
 import About from './components/About';
-
 function App() {
   return (
     <Routes>
@@ -17,6 +16,5 @@ function App() {
     </Routes>
   );
 }
-
 export default App;
 

@@ -9,52 +9,43 @@ import '../stylesheets/footer.css';
 import '../stylesheets/analyzeproducts.css';
 import '../stylesheets/loadSpinner.css'
 import SentimentGauge from './sentimentSpeedometer';
-// import ReviewWordCloud from './ReviewWordCloud';
-
+import ReviewWordCloud from './ReviewWordCloud';
 function shouldDisplayReviewText(rating, heading, text) {
   if (!rating || !heading || !text) return true;
   const combined = rating + heading;
   return combined !== text;
 }
-
 function AnalyzeProduct() {
   const [analysis, setAnalysis] = useState(null);
   const [geminiAnalysis, setGeminiAnalysis] = useState(null);
   const [ loading, setLoading] = useState(true);
   const location = useLocation();
-
   // Extract product details from query parameters
   const searchParams = new URLSearchParams(location.search);
   const productUrl = searchParams.get('url');
   const productTitle = searchParams.get('title')||searchParams.get('url');
   const productPrice = searchParams.get('price')||'';
   const productImage = searchParams.get('image')||'';
-
   useEffect(() => {
     async function fetchAnalysis() {
       try {
         setLoading(true);
         console.log("Fetching analysis for:", productUrl, productTitle);
-        const response = await axios.get(`https://sentiflip-backend.onrender.com/analyze/?url=${encodeURIComponent(productUrl)}`);
-        const geminiResponse = await axios.get(`https://sentiflip-backend.onrender.com/gemini/?title=${encodeURIComponent(productTitle)}`);
+        const response = await axios.get(`http://127.0.0.1:8000/analyze/?url=${encodeURIComponent(productUrl)}`);
+        const geminiResponse = await axios.get(`http://127.0.0.1:8000/gemini/?title=${encodeURIComponent(productTitle)}`);
         setAnalysis(response.data);
         setLoading(false);
         setGeminiAnalysis(geminiResponse.data.details_of_product);
-        
       } catch (err) {
         console.error("Error analyzing product:", err);
-        
       }
     }
     fetchAnalysis();
   }, [productUrl, productTitle]);
-
-
   if (loading) {
     return (
       <>
       <Navbar></Navbar>
-     
         {productPrice &&
         <section className="product-info">
           <h3 className="section-title"></h3>
@@ -66,29 +57,23 @@ function AnalyzeProduct() {
           <a className="analyze-button"  href={productUrl}>View on Flipkart</a>
         </section>
         }
-  
       <>
         <div class="loadingSpinner">
           <div class="spinner">
-            
-              <img className='logoimg' src="../../public/sentiflip_logo.png" alt="" />
-            
+              <img className="logoimg" src="/sentiflip_logo.png" alt="Sentiflip Logo" />
           </div>
           <div class="loadingText">Loading... Please wait</div>
         </div>    
-      </>
-      <br /><br /><br /><br /><br /><br /><br /><br />
+      </><br /><br /><br /><br /><br /><br /><br /><br />
       <Footer></Footer>
       </>
     )
   }
-
   return (
     <>
       <Navbar />
       <div className="analysis-container">
         <h2 className="main-title">📊 Sentiment Analysis of product</h2>
-
         {/* Product Info */}
         {productPrice &&
         <section className="product-info">
@@ -101,15 +86,13 @@ function AnalyzeProduct() {
           <a className="analyze-button"  href={productUrl}>View on Flipkart</a>
         </section>
         }
-
         {/* Sentiment Stats */}
          <section className='sentiment speedometer'>
           <SentimentGauge score={analysis.overall_score}/>
         </section>
-        {/* <section className='wordcloud'>
+        <section className='wordcloud'>
           <ReviewWordCloud reviews={analysis.reviews} />
-        </section> */}
-        
+        </section>
         <section className="gemini-analysis">
           <h3 className="section-title">Details of analysis</h3>
           <br />
@@ -121,9 +104,6 @@ function AnalyzeProduct() {
             <b><p className="sentiment-label feature-item">🧠 Sentiment: <strong>{analysis.sentiment_label}</strong></p></b>
             <b><p className="final-verdict feature-item">🧾 Verdict: <strong>{analysis.final_verdict}</strong></p></b>
           </div>
-       
-
-          {/* <h3 className="subsection-title">📝 Keywords:</h3> */}
           <div className="keywords-section">
             <h4 className="subsection-title">Common Positive keywords:</h4>
             <ul className="pros-list">
@@ -135,7 +115,6 @@ function AnalyzeProduct() {
                 <li>No positive comments identified</li>
               )}
             </ul>
-
             <h4 className="subsection-title">Common Negative keywords:</h4>
             <ul className="cons-list">
               {analysis.cons_keywords.length > 0 ? (
@@ -147,7 +126,6 @@ function AnalyzeProduct() {
               )}
             </ul>
           </div>
-
           <h3 className="subsection-title">📝 Top Reviews:</h3>
           <div className="top-reviews">
             <h4>Top Positive Reviews:</h4>
@@ -160,7 +138,6 @@ function AnalyzeProduct() {
                 <li>No positive reviews available</li>
               )}
             </ul>
-
             <h4>Top Negative Reviews:</h4>
             <ul >
               {analysis.top_negative_reviews.length > 0 ? (
@@ -173,42 +150,32 @@ function AnalyzeProduct() {
               )}
             </ul>
           </div>
-          <br />
-          <hr />
-          
         </section>
-        
         {/* Gemini AI Output */}
         <section className="gemini-analysis">
           <h3 className="section-title">🤖 Gemini AI Insights</h3>
-          <br />
           <h2 className="product-heading">📦 {geminiAnalysis.product_name}</h2>
-
           <h3 className="subsection-title">🔍 Key Features:</h3>
           <ul className="feature-list">
             {geminiAnalysis.features?.map((feature, index) => (
               <li key={index} className="feature-item">{feature}</li>
             ))}
           </ul>
-
           <h3 className="subsection-title">👍 Pros:</h3>
           <ul className="pros-list">
             {geminiAnalysis.pros?.map((pro, index) => (
               <li key={index} className="pros-item">{pro}</li>
             ))}
           </ul>
-
           <h3 className="subsection-title">👎 Cons:</h3>
           <ul className="cons-list">
             {geminiAnalysis.cons?.map((con, index) => (
               <li key={index} className="cons-item">{con}</li>
             ))}
           </ul>
-
           <h3 className="subsection-title">🧾 Summary:</h3>
           <p className="summary-text">{geminiAnalysis.summary}</p>
         </section>
-
         {/* Reviews */}
         <section className="review-section">
           <h3 className="section-title">📝 Reviews:</h3>
@@ -231,12 +198,9 @@ function AnalyzeProduct() {
             ))}
           </ul>
         </section>
-
-        
       </div>
       <Footer />
     </>
   );
 }
-
 export default AnalyzeProduct;
